@@ -38,7 +38,7 @@ class Books extends Component {
               shelves.map((shelf) =>(
 
                 shelf.shelfName === "read" ?
-                <div className="bookshelf-books">
+                <div className="bookshelf-books" key={shelf.shelfName}>
 
                 <h2 className="bookshelf-title">{shelf.title}</h2>
                           <ol className="books-grid"> {

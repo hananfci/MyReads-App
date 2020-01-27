@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import Books from "./Books.js";
 import SearchBooks from "./SearchBooks.js";
-
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Route } from 'react-router-dom'
  import * as BooksAPI from './BooksAPI'
@@ -31,7 +29,7 @@ class BooksApp extends React.Component {
   }
   
  updatebook = (book,newshelf) => {
-  const bookshelf=this.state.books.find(item => item.id===book.id)
+  const bookshelf=this.state.books.find(currentbook => currentbook.id===book.id)
   if(bookshelf){
     bookshelf.shelf=newshelf;
   BooksAPI.update(book,newshelf)
@@ -43,7 +41,7 @@ class BooksApp extends React.Component {
         BooksAPI.update(book,newshelf)
         .then(
           this.setstate = (currentstate => ({
-            books:currentstate.books.concat(book)
+           books:currentstate.books.concat(book)
           }))
         )
 

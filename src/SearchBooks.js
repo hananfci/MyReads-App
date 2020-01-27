@@ -53,7 +53,7 @@ class SearchBooks extends Component {
        }
      }))
      myBooks.concat(addToState)
-     return searchResults
+     return myBooks
     }
   }
   render() {
@@ -68,7 +68,13 @@ class SearchBooks extends Component {
       }))
     }) */
    
-    
+   const removeContact = (book) => {
+      this.setState((currentbook) => ({
+        resultbooks: currentbook.resultbooks.filter((c) => {
+          return c.id !== book.id
+        })
+      }))
+    }
     return (
         <div className="search-books">
         <div className="search-books-bar">
@@ -107,7 +113,7 @@ class SearchBooks extends Component {
                        <div className="book-top">
                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                      <div className="book-shelf-changer">
-                       <select value={book.shelf ? book.shelf : 'none'} onChange={(e) => onupdate(book, e.target.value)} >
+                       <select value={book.shelf ? book.shelf : 'none'} onChange={(e) =>{ onupdate(book, e.target.value); removeContact(book)}} >
                        <option value="move" disabled>Move to...</option>
                        <option value="currentlyReading">Currently Reading</option>
                        <option value="wantToRead">Want to Read</option>

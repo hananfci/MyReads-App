@@ -28,7 +28,9 @@ class Books extends Component {
 /* eslint-disable */
   render() {
     const { books, onupdate } = this.props
-    
+    function getshelfbook(shelfbook){
+      return books.filter(book => book.shelf === shelfbook);
+     }
     return (
      
       <div>
@@ -42,6 +44,11 @@ class Books extends Component {
 
                 <h2 className="bookshelf-title">{shelf.title}</h2>
                           <ol className="books-grid"> {
+                             getshelfbook(shelf.shelfName).length === 0 ? (
+                              <div>
+                                <h4>No books in this shelf</h4>
+                              </div>
+                            ):
                                books.map( (book) => (
                                  book.shelf==="read" &&
                                   <li key={book.id}>
@@ -66,11 +73,22 @@ class Books extends Component {
                           </ol>
                       </div>
                 : shelf.shelfName === "currentlyReading" ?
+               
                 <div className="bookshelf-books">
 
-                <h2 className="bookshelf-title">{shelf.title}</h2>
-                          <ol className="books-grid"> {
-                               books.map( (book) => (
+                <h2 className="bookshelf-title">{shelf.title}</h2> 
+                        {
+                               getshelfbook(shelf.shelfName).length === 0 ? (
+                                <div>
+                                  <h4>No books in this shelf</h4>
+                                </div>
+                              ):  
+                          <ol className="books-grid"> 
+                          {
+
+                        
+                       books.map( (book) => (
+                        
                                  book.shelf==="currentlyReading" &&
                                   <li key={book.id}>
                                         <div className="book">
@@ -92,11 +110,18 @@ class Books extends Component {
                                   </li>))
                                   }
                           </ol>
-                      </div>:
+                  }
+                  </div>
+                     :
                        <div className="bookshelf-books">
 
                        <h2 className="bookshelf-title">{shelf.title}</h2>
                                  <ol className="books-grid"> {
+                                    getshelfbook(shelf.shelfName).length === 0 ? (
+                                      <div>
+                                        <h4>No books in this shelf</h4>
+                                      </div>
+                                    ):
                                       books.map( (book) => (
                                         book.shelf==="wantToRead" &&
                                          <li key={book.id}>

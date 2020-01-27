@@ -77,7 +77,6 @@ class BooksApp extends React.Component {
           <div className="open-search">
           <Link to={{
             pathname: '/SearchBooks',
-            state: { showSearchPage: true }
            }}>
            Add a book
            </Link> 
